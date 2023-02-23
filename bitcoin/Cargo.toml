@@ -1,13 +1,13 @@
 [package]
 name = "litecoinlib"
 version = "0.29.0"
-authors = ["Waheed Rahuman <marspoolxyz@gmail.com>"]
+authors = ["Marspool <marspoolxyz@gmail.com>"]
 license = "CC0-1.0"
 repository = "https://github.com/marspoolxyz/rust-litecoin/"
 documentation = "https://docs.rs/bitcoin/"
 description = "General purpose library for using and interoperating with Litecoin."
 categories = ["cryptography::cryptocurrencies"]
-keywords = [ "crypto", "bitcoin","litecoin" ]
+keywords = [ "crypto", "bitcoin","litecoin","icp","Internet Computer" ]
 readme = "README.md"
 edition = "2018"
 exclude = ["tests", "contrib"]
@@ -34,7 +34,7 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
-bitcoin-internals = { path = "../internals" }
+bitcoin-internals = { version = "0.1.0" , default-features = false }
 bech32 = { version = "0.9.0", default-features = false }
 bitcoin_hashes = { version = "0.11.0", default-features = false }
 secp256k1 = { version = "0.25.0", default-features = false, features = ["bitcoin_hashes"] }
