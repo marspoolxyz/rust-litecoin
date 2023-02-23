@@ -9,8 +9,8 @@
 //!
 //! ```rust
 //! # #[cfg(feature = "rand-std")] {
-//! use bitcoin::{Address, PublicKey, Network};
-//! use bitcoin::secp256k1::{rand, Secp256k1};
+//! use litecoinlib::{Address, PublicKey, Network};
+//! use litecoinlib::secp256k1::{rand, Secp256k1};
 //!
 //! // Generate random key pair.
 //! let s = Secp256k1::new();
@@ -645,8 +645,8 @@ impl NetworkValidation for NetworkUnchecked { const IS_CHECKED: bool = false; }
 ///
 /// ```rust
 /// use std::str::FromStr;
-/// use bitcoin::{Address, Network};
-/// use bitcoin::address::{NetworkUnchecked, NetworkChecked};
+/// use litecoinlib::{Address, Network};
+/// use litecoinlib::address::{NetworkUnchecked, NetworkChecked};
 ///
 /// // variant 1
 /// let address: Address<NetworkUnchecked> = "32iVBEu4dxkUQk9dJbZUiBiQdmypcEyJRf".parse().unwrap();
@@ -670,7 +670,7 @@ impl NetworkValidation for NetworkUnchecked { const IS_CHECKED: bool = false; }
 ///
 /// ```
 /// # use std::str::FromStr;
-/// # use bitcoin::address::{Address, NetworkChecked};
+/// # use litecoinlib::address::{Address, NetworkChecked};
 /// let address: Address<NetworkChecked> = Address::from_str("132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM")
 ///                .unwrap().assume_checked();
 /// assert_eq!(address.to_string(), "132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM");
@@ -678,7 +678,7 @@ impl NetworkValidation for NetworkUnchecked { const IS_CHECKED: bool = false; }
 ///
 /// ```ignore
 /// # use std::str::FromStr;
-/// # use bitcoin::address::{Address, NetworkChecked};
+/// # use litecoinlib::address::{Address, NetworkChecked};
 /// let address: Address<NetworkUnchecked> = Address::from_str("132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM")
 ///                .unwrap();
 /// let s = address.to_string(); // does not compile
@@ -690,7 +690,7 @@ impl NetworkValidation for NetworkUnchecked { const IS_CHECKED: bool = false; }
 ///
 /// ```
 /// # use std::str::FromStr;
-/// # use bitcoin::address::{Address, NetworkUnchecked};
+/// # use litecoinlib::address::{Address, NetworkUnchecked};
 /// let address: Address<NetworkUnchecked> = Address::from_str("132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM")
 ///                .unwrap();
 /// assert_eq!(format!("{:?}", address), "Address<NetworkUnchecked>(132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM)");
@@ -698,7 +698,7 @@ impl NetworkValidation for NetworkUnchecked { const IS_CHECKED: bool = false; }
 ///
 /// ```
 /// # use std::str::FromStr;
-/// # use bitcoin::address::{Address, NetworkChecked};
+/// # use litecoinlib::address::{Address, NetworkChecked};
 /// let address: Address<NetworkChecked> = Address::from_str("132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM")
 ///                .unwrap().assume_checked();
 /// assert_eq!(format!("{:?}", address), "132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM");
@@ -966,8 +966,8 @@ impl Address<NetworkUnchecked> {
     /// network a simple comparison is not enough anymore. Instead this function can be used.
     ///
     /// ```rust
-    /// use bitcoin::{Address, Network};
-    /// use bitcoin::address::NetworkUnchecked;
+    /// use litecoinlib::{Address, Network};
+    /// use litecoinlib::address::NetworkUnchecked;
     ///
     /// let address: Address<NetworkUnchecked> = "2N83imGV3gPwBzKJQvWJ7cRUY2SpUyU6A5e".parse().unwrap();
     /// assert!(address.is_valid_for_network(Network::Testnet));

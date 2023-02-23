@@ -18,7 +18,7 @@ use crate::prelude::*;
 /// # Examples
 /// ```
 /// # use core::str::FromStr;
-/// # use bitcoin::Amount;
+/// # use litecoinlib::Amount;
 ///
 /// assert_eq!(Amount::from_str("1 BTC").unwrap(), Amount::from_sat(100_000_000));
 /// assert_eq!(Amount::from_str("1 mBTC").unwrap(), Amount::from_sat(100_000));
@@ -568,7 +568,7 @@ impl Amount {
     ///
     /// # Examples
     /// ```
-    /// # use bitcoin::{Amount, Denomination};
+    /// # use litecoinlib::{Amount, Denomination};
     /// let amount = Amount::from_sat(100_000);
     /// assert_eq!(amount.to_btc(), amount.to_float_in(Denomination::Bitcoin))
     /// ```
@@ -1190,12 +1190,12 @@ pub mod serde {
     //!
     //! ```rust,ignore
     //! use serde::{Serialize, Deserialize};
-    //! use bitcoin::Amount;
+    //! use litecoinlib::Amount;
     //!
     //! #[derive(Serialize, Deserialize)]
     //! # #[serde(crate = "actual_serde")]
     //! pub struct HasAmount {
-    //!     #[serde(with = "bitcoin::amount::serde::as_btc")]
+    //!     #[serde(with = "litecoinlib::amount::serde::as_btc")]
     //!     pub amount: Amount,
     //! }
     //! ```

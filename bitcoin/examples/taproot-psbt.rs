@@ -78,20 +78,20 @@ const UTXO_3: P2trUtxo = P2trUtxo {
 use std::collections::BTreeMap;
 use std::str::FromStr;
 
-use bitcoin::bip32::{ChildNumber, DerivationPath, ExtendedPrivKey, ExtendedPubKey, Fingerprint};
-use bitcoin::consensus::encode;
-use bitcoin::constants::COIN_VALUE;
-use bitcoin::crypto::taproot;
-use bitcoin::hashes::Hash;
-use bitcoin::key::{TapTweak, XOnlyPublicKey};
-use bitcoin::opcodes::all::{OP_CHECKSIG, OP_CLTV, OP_DROP};
-use bitcoin::psbt::{self, Input, Output, Psbt, PsbtSighashType};
-use bitcoin::secp256k1::{Message, Secp256k1};
-use bitcoin::sighash::{self, TapSighashType, SighashCache};
-use bitcoin::taproot::{
+use litecoinlib::bip32::{ChildNumber, DerivationPath, ExtendedPrivKey, ExtendedPubKey, Fingerprint};
+use litecoinlib::consensus::encode;
+use litecoinlib::constants::COIN_VALUE;
+use litecoinlib::crypto::taproot;
+use litecoinlib::hashes::Hash;
+use litecoinlib::key::{TapTweak, XOnlyPublicKey};
+use litecoinlib::opcodes::all::{OP_CHECKSIG, OP_CLTV, OP_DROP};
+use litecoinlib::psbt::{self, Input, Output, Psbt, PsbtSighashType};
+use litecoinlib::secp256k1::{Message, Secp256k1};
+use litecoinlib::sighash::{self, TapSighashType, SighashCache};
+use litecoinlib::taproot::{
     LeafVersion, TapLeafHash, TapSighash, TaprootBuilder, TaprootSpendInfo,
 };
-use bitcoin::{
+use litecoinlib::{
     absolute, script, Address, Amount, Network, OutPoint, ScriptBuf, Transaction, TxIn, TxOut,  Witness,
 };
 
@@ -242,7 +242,7 @@ fn generate_bip86_key_spend_tx(
                 vout: input_utxo.vout,
             },
             script_sig: ScriptBuf::new(),
-            sequence: bitcoin::Sequence(0xFFFFFFFF), // Ignore nSequence.
+            sequence: litecoinlib::Sequence(0xFFFFFFFF), // Ignore nSequence.
             witness: Witness::default(),
         }],
         output: outputs,
@@ -426,7 +426,7 @@ impl BenefactorWallet {
             input: vec![TxIn {
                 previous_output: OutPoint { txid: tx.txid(), vout: 0 },
                 script_sig: ScriptBuf::new(),
-                sequence: bitcoin::Sequence(0xFFFFFFFD), // enable locktime and opt-in RBF
+                sequence: litecoinlib::Sequence(0xFFFFFFFD), // enable locktime and opt-in RBF
                 witness: Witness::default(),
             }],
             output: vec![],
@@ -574,7 +574,7 @@ impl BenefactorWallet {
                 input: vec![TxIn {
                     previous_output: OutPoint { txid: tx.txid(), vout: 0 },
                     script_sig: ScriptBuf::new(),
-                    sequence: bitcoin::Sequence(0xFFFFFFFD), // enable locktime and opt-in RBF
+                    sequence: litecoinlib::Sequence(0xFFFFFFFD), // enable locktime and opt-in RBF
                     witness: Witness::default(),
                 }],
                 output: vec![],

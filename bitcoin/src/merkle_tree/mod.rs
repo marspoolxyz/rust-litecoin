@@ -6,8 +6,8 @@
 //! # Examples
 //!
 //! ```
-//! # use bitcoin::{merkle_tree, Txid};
-//! # use bitcoin::hashes::Hash;
+//! # use litecoinlib::{merkle_tree, Txid};
+//! # use litecoinlib::hashes::Hash;
 //! # let tx1 = Txid::all_zeros();  // Dummy hash values.
 //! # let tx2 = Txid::all_zeros();
 //! let tx_hashes = vec![tx1, tx2]; // All the hashes we wish to merkelize.

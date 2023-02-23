@@ -1,7 +1,7 @@
 extern crate bitcoin;
 
 fn do_test(data: &[u8]) {
-    let _: Result<bitcoin::network::message::RawNetworkMessage, _> = bitcoin::consensus::encode::deserialize(data);
+    let _: Result<litecoinlib::network::message::RawNetworkMessage, _> = litecoinlib::consensus::encode::deserialize(data);
 }
 
 #[cfg(feature = "afl")]

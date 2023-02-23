@@ -26,19 +26,19 @@ use std::collections::BTreeMap;
 use std::str::FromStr;
 
 use bincode::serialize;
-use bitcoin::bip32::{ChildNumber, ExtendedPrivKey, ExtendedPubKey, KeySource};
-use bitcoin::blockdata::locktime::{absolute, relative};
-use bitcoin::blockdata::witness::Witness;
-use bitcoin::consensus::encode::deserialize;
-use bitcoin::crypto::key::UntweakedPublicKey;
-use bitcoin::crypto::{ecdsa, taproot};
-use bitcoin::hashes::hex::FromHex;
-use bitcoin::hashes::{hash160, ripemd160, sha256, sha256d, Hash};
-use bitcoin::psbt::raw::{self, Key, Pair, ProprietaryKey};
-use bitcoin::psbt::{Input, Output, Psbt, PsbtSighashType};
-use bitcoin::sighash::{EcdsaSighashType, TapSighashType};
-use bitcoin::taproot::{ControlBlock, LeafVersion, TaprootBuilder, TaprootSpendInfo};
-use bitcoin::{
+use litecoinlib::bip32::{ChildNumber, ExtendedPrivKey, ExtendedPubKey, KeySource};
+use litecoinlib::blockdata::locktime::{absolute, relative};
+use litecoinlib::blockdata::witness::Witness;
+use litecoinlib::consensus::encode::deserialize;
+use litecoinlib::crypto::key::UntweakedPublicKey;
+use litecoinlib::crypto::{ecdsa, taproot};
+use litecoinlib::hashes::hex::FromHex;
+use litecoinlib::hashes::{hash160, ripemd160, sha256, sha256d, Hash};
+use litecoinlib::psbt::raw::{self, Key, Pair, ProprietaryKey};
+use litecoinlib::psbt::{Input, Output, Psbt, PsbtSighashType};
+use litecoinlib::sighash::{EcdsaSighashType, TapSighashType};
+use litecoinlib::taproot::{ControlBlock, LeafVersion, TaprootBuilder, TaprootSpendInfo};
+use litecoinlib::{
     Address, Block, Network, OutPoint, PrivateKey, PublicKey, ScriptBuf, Sequence, Target,
     Transaction, TxIn, TxOut, Txid, Work,
 };

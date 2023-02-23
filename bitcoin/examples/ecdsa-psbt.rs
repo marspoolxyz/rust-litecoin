@@ -33,14 +33,14 @@ use std::collections::BTreeMap;
 use std::fmt;
 use std::str::FromStr;
 
-use bitcoin::bip32::{
+use litecoinlib::bip32::{
     ChildNumber, DerivationPath, ExtendedPrivKey, ExtendedPubKey, Fingerprint, IntoDerivationPath,
 };
-use bitcoin::consensus::encode;
-use bitcoin::locktime::absolute;
-use bitcoin::psbt::{self, Input, Psbt, PsbtSighashType};
-use bitcoin::secp256k1::{Secp256k1, Signing, Verification};
-use bitcoin::{
+use litecoinlib::consensus::encode;
+use litecoinlib::locktime::absolute;
+use litecoinlib::psbt::{self, Input, Psbt, PsbtSighashType};
+use litecoinlib::secp256k1::{Secp256k1, Signing, Verification};
+use litecoinlib::{
     Address, Amount, Network, OutPoint, PublicKey, ScriptBuf, Sequence, Transaction, TxIn, TxOut,
     Witness,
 };

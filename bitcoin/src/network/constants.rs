@@ -17,8 +17,8 @@
 //! # Example: encoding a network's magic bytes
 //!
 //! ```rust
-//! use bitcoin::network::constants::Network;
-//! use bitcoin::consensus::encode::serialize;
+//! use litecoinlib::network::constants::Network;
+//! use litecoinlib::consensus::encode::serialize;
 //!
 //! let network = Network::Bitcoin;
 //! let bytes = serialize(&network.magic());
@@ -81,7 +81,7 @@ impl Network {
     /// # Examples
     ///
     /// ```rust
-    /// use bitcoin::network::constants::{Network, Magic};
+    /// use litecoinlib::network::constants::{Network, Magic};
     /// use std::convert::TryFrom;
     ///
     /// assert_eq!(Ok(Network::Bitcoin), Network::try_from(Magic::from_bytes([0xFB, 0xC0, 0xB6, 0xDB])));
@@ -95,7 +95,7 @@ impl Network {
     /// # Examples
     ///
     /// ```rust
-    /// use bitcoin::network::constants::{Network, Magic};
+    /// use litecoinlib::network::constants::{Network, Magic};
     ///
     /// let network = Network::Bitcoin;
     /// assert_eq!(network.magic(), Magic::from_bytes([0xFB, 0xC0, 0xB6, 0xDB]));
@@ -191,8 +191,8 @@ impl fmt::Display for Network {
 pub struct Magic([u8; 4]);
 
 impl Magic {
-    /// Litecoin mainnet network magic bytes.
-    pub const BITCOIN: Self = Self([0xFB, 0xC0, 0xB6, 0xDB]);
+    /// Litecoin mainnet network magic bytes. 0xFB, 0xC0, 0xB6, 0xDB
+    pub const BITCOIN: Self = Self([0xF9, 0xBE, 0xB4, 0xD9]); //BITCOIN 0xF9, 0xBE, 0xB4, 0xD9
     /// Bitcoin testnet network magic bytes.
     pub const TESTNET: Self = Self([0x0B, 0x11, 0x09, 0x07]);
     /// Bitcoin signet network magic bytes.

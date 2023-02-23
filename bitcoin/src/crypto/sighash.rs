@@ -764,18 +764,18 @@ impl<R: Borrow<Transaction>> SighashCache<R> {
 
         self.tx.borrow().version.consensus_encode(&mut writer)?;
 
-        if !anyone_can_pay /*{
+        if !anyone_can_pay {
             self.segwit_cache().prevouts.consensus_encode(&mut writer)?;
-        } else*/ {
+        } else {
             zero_hash.consensus_encode(&mut writer)?;
         }
 
         if !anyone_can_pay
             && sighash != EcdsaSighashType::Single
             && sighash != EcdsaSighashType::None
-        /*{
+        {
             self.segwit_cache().sequences.consensus_encode(&mut writer)?;
-        } else */{
+        } else {
             zero_hash.consensus_encode(&mut writer)?;
         }
 
@@ -791,9 +791,9 @@ impl<R: Borrow<Transaction>> SighashCache<R> {
             txin.sequence.consensus_encode(&mut writer)?;
         }
 
-        /*if sighash != EcdsaSighashType::Single && sighash != EcdsaSighashType::None {
+        if sighash != EcdsaSighashType::Single && sighash != EcdsaSighashType::None {
             self.segwit_cache().outputs.consensus_encode(&mut writer)?;
-        } else */if sighash == EcdsaSighashType::Single && input_index < self.tx.borrow().output.len() {
+        } else if sighash == EcdsaSighashType::Single && input_index < self.tx.borrow().output.len() {
             let mut single_enc = LegacySighash::engine();
             self.tx.borrow().output[input_index].consensus_encode(&mut single_enc)?;
             let hash = LegacySighash::from_engine(single_enc);
@@ -1026,7 +1026,7 @@ impl<R: Borrow<Transaction>> SighashCache<R> {
         })
     }
 
-    /*
+    
     fn segwit_cache(&mut self) -> &SegwitCache {
         let common_cache = &mut self.common_cache;
         let tx = self.tx.borrow();
@@ -1041,7 +1041,7 @@ impl<R: Borrow<Transaction>> SighashCache<R> {
                   
             }
         })
-    } */
+    } 
      
 
     fn taproot_cache<T: Borrow<TxOut>>(&mut self, prevouts: &[T]) -> &TaprootCache {
@@ -1066,8 +1066,8 @@ impl<R: BorrowMut<Transaction>> SighashCache<R> {
     ///
     /// This allows in-line signing such as
     /// ```
-    /// use bitcoin::{absolute, Transaction, Script};
-    /// use bitcoin::sighash::{EcdsaSighashType, SighashCache};
+    /// use litecoinlib::{absolute, Transaction, Script};
+    /// use litecoinlib::sighash::{EcdsaSighashType, SighashCache};
     ///
     /// let mut tx_to_sign = Transaction { version: 2, lock_time: absolute::LockTime::ZERO, input: Vec::new(), output: Vec::new() };
     /// let input_count = tx_to_sign.input.len();
@@ -1697,7 +1697,7 @@ mod tests {
             "c37af31116d1b27caf68aae9e3ac82f1477929014d5b917657d0eb49478cb670".parse::<SegwitV0Sighash>().unwrap(),
         );
 
-        /*
+        
         let cache = cache.segwit_cache();
         // Parse hex into Vec because BIP143 test vector displays forwards but our sha256d::Hash displays backwards.
         assert_eq!(
@@ -1711,7 +1711,7 @@ mod tests {
         assert_eq!(
             cache.outputs.into_inner(),
             &Vec::from_hex("863ef3e1a92afbfdb97f31ad0fc7683ee943e9abcf2501590ff8f6551f47e5e5").unwrap()[..],
-        ); */
+        ); 
     }
 
     #[test]
@@ -1734,7 +1734,7 @@ mod tests {
             "64f3b0f4dd2bb3aa1ce8566d220cc74dda9df97d8490cc81d89d735c92e59fb6".parse::<SegwitV0Sighash>().unwrap(),
         );
 
-        /*
+        
         let cache = cache.segwit_cache();
         // Parse hex into Vec because BIP143 test vector displays forwards but our sha256d::Hash displays backwards.
         assert_eq!(
@@ -1749,7 +1749,7 @@ mod tests {
             cache.outputs.into_inner(),
             &Vec::from_hex("de984f44532e2173ca0d64314fcefe6d30da6f8cf27bafa706da61df8a226c83").unwrap()[..],
         );
-         */
+         
     }
 
     #[test]
@@ -1776,7 +1776,7 @@ mod tests {
             cache.segwit_signature_hash(0, &witness_script, value, EcdsaSighashType::All).unwrap(),
             "185c0be5263dce5b4bb50a047973c1b6272bfbd0103a89444597dc40b248ee7c".parse::<SegwitV0Sighash>().unwrap(),
         );
-        /*
+        
         let cache = cache.segwit_cache();
         // Parse hex into Vec because BIP143 test vector displays forwards but our sha256d::Hash displays backwards.
         assert_eq!(
@@ -1791,6 +1791,6 @@ mod tests {
             cache.outputs.into_inner(),
             &Vec::from_hex("bc4d309071414bed932f98832b27b4d76dad7e6c1346f487a8fdbb8eb90307cc").unwrap()[..],
         );
-         */
+         
     }
 }

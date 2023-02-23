@@ -1,9 +1,9 @@
 [package]
-name = "bitcoin_hashes"
-version = "0.11.0"
+name = "litecoin_hashes"
+version = "0.1.2"
 authors = ["Andrew Poelstra <apoelstra@wpsoftware.net>"]
 license = "CC0-1.0"
-repository = "https://github.com/rust-bitcoin/bitcoin_hashes/"
+repository = "https://github.com/rust-litecoin/bitcoin_hashes/"
 documentation = "https://docs.rs/bitcoin_hashes/"
 description = "Hash functions used by the rust-bitcoin eccosystem"
 categories = ["algorithms"]
@@ -24,7 +24,7 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
-internals = { path = "../internals", package = "bitcoin-internals" }
+internals = { version = "0.1.0",path = "../internals", package = "bitcoin-internals" }
 
 core2 = { version = "0.3.0", default_features = false, optional = true }
 # Only enable this if you explicitly do not want to use "std", otherwise enable "serde-std".
