@@ -1,5 +1,5 @@
 [package]
-name = "litecoinlib"
+name = "bitcoin"
 version = "0.29.0"
 authors = ["Marspool <marspoolxyz@gmail.com>"]
 license = "CC0-1.0"
