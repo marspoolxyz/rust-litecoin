@@ -18,11 +18,11 @@
 //! # Example: creating a new address from a randomly-generated key pair
 //!
 //! ```rust
-//! use bitcoin::network::constants::Network;
-//! use bitcoin::util::address::Address;
-//! use bitcoin::PublicKey;
-//! use bitcoin::secp256k1::Secp256k1;
-//! use bitcoin::secp256k1::rand::thread_rng;
+//! use litcoinlib::network::constants::Network;
+//! use litcoinlib::util::address::Address;
+//! use litcoinlib::PublicKey;
+//! use litcoinlib::secp256k1::Secp256k1;
+//! use litcoinlib::secp256k1::rand::thread_rng;
 //!
 //! // Generate random key pair.
 //! let s = Secp256k1::new();
@@ -666,7 +666,7 @@ impl Address {
         self.payload.script_pubkey()
     }
 
-    /// Creates a URI string *bitcoin:address* optimized to be encoded in QR codes.
+    /// Creates a URI string *litcoinlib:address* optimized to be encoded in QR codes.
     ///
     /// If the address is bech32, both the schema and the address become uppercase.
     /// If the address is base58, the schema is lowercase and the address is left mixed case.
@@ -688,7 +688,7 @@ impl Address {
     /// network a simple comparison is not enough anymore. Instead this function can be used.
     ///
     /// ```rust
-    /// use bitcoin::{Address, Network};
+    /// use litcoinlib::{Address, Network};
     ///
     /// let address: Address = "2N83imGV3gPwBzKJQvWJ7cRUY2SpUyU6A5e".parse().unwrap();
     /// assert!(address.is_valid_for_network(Network::Testnet));
@@ -1223,12 +1223,12 @@ mod tests {
     fn test_qr_string() {
         for el in  ["132F25rTsvBdp9JzLLBHP5mvGY66i1xdiM", "33iFwdLuRpW1uK1RTRqsoi8rR4NpDzk66k"].iter() {
             let addr = Address::from_str(el).unwrap();
-            assert_eq!(addr.to_qr_uri(), format!("bitcoin:{}", el));
+            assert_eq!(addr.to_qr_uri(), format!("litcoinlib:{}", el));
         }
 
         for el in ["bcrt1q2nfxmhd4n3c8834pj72xagvyr9gl57n5r94fsl", "bc1qwqdg6squsna38e46795at95yu9atm8azzmyvckulcc7kytlcckxswvvzej"].iter() {
             let addr = Address::from_str(el).unwrap();
-            assert_eq!(addr.to_qr_uri(), format!("BITCOIN:{}", el.to_ascii_uppercase()) );
+            assert_eq!(addr.to_qr_uri(), format!("litcoinlib:{}", el.to_ascii_uppercase()) );
         }
     }
 

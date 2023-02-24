@@ -1,8 +1,8 @@
 
 extern crate bitcoin;
 
-use bitcoin::blockdata::transaction::OutPoint;
-use bitcoin::consensus::encode;
+use litcoinlib::blockdata::transaction::OutPoint;
+use litcoinlib::consensus::encode;
 
 use std::str::FromStr;
 

@@ -13,9 +13,9 @@ use core::panic::PanicInfo;
 
 use alloc_cortex_m::CortexMHeap;
 // use panic_halt as _;
-use bitcoin::{Address, Network, PrivateKey};
-use bitcoin::secp256k1::ffi::types::AlignedType;
-use bitcoin::secp256k1::Secp256k1;
+use litcoinlib::{Address, Network, PrivateKey};
+use litcoinlib::secp256k1::ffi::types::AlignedType;
+use litcoinlib::secp256k1::Secp256k1;
 
 use cortex_m::asm;
 use cortex_m_rt::entry;

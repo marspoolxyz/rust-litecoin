@@ -128,7 +128,7 @@ pub fn genesis_block(network: Network) -> Block {
                     prev_blockhash: Default::default(),
                     merkle_root,
                     time: 1317958265,
-                    bits: 0x1E0FFFF0,
+                    bits: 0x1e0ffff0,
                     nonce: 2084524493
                     
 
@@ -214,15 +214,20 @@ mod test {
     fn bitcoin_genesis_full_block() {
         let gen = genesis_block(Network::Bitcoin);
 
+        eprintln!("Vector block {} gen.header.merkle_root", gen.block_hash());
+
+        eprintln!("Vector block {} gen.header.merkle_root", gen.header.merkle_root);
+
         assert_eq!(gen.header.version, 1);
         assert_eq!(gen.header.prev_blockhash, Default::default());
-        assert_eq!(format!("{:x}", gen.header.merkle_root),
-                   "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b".to_string());
-        assert_eq!(gen.header.time, 1231006505);
-        assert_eq!(gen.header.bits, 0x1d00ffff);
-        assert_eq!(gen.header.nonce, 2083236893);
         assert_eq!(format!("{:x}", gen.header.block_hash()),
-                   "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f".to_string());
+        "12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2");
+
+        assert_eq!(format!("{:x}", gen.header.merkle_root),
+                   "97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9".to_string());
+        assert_eq!(gen.header.time, 1317958265);
+        assert_eq!(gen.header.bits, 0x1e0ffff0);
+        assert_eq!(gen.header.nonce, 2084524493);
     }
 
     #[test]

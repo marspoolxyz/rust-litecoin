@@ -988,11 +988,11 @@ pub mod serde {
     //!
     //! ```rust,ignore
     //! use serde::{Serialize, Deserialize};
-    //! use bitcoin::Amount;
+    //! use litcoinlib::Amount;
     //!
     //! #[derive(Serialize, Deserialize)]
     //! pub struct HasAmount {
-    //!     #[serde(with = "bitcoin::util::amount::serde::as_btc")]
+    //!     #[serde(with = "litcoinlib::util::amount::serde::as_btc")]
     //!     pub amount: Amount,
     //! }
     //! ```
