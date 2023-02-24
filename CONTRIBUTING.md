@@ -128,9 +128,9 @@ PR authors may also find it useful to run the following script locally in order
 to check that each of the commits within the PR satisfies the requirements
 above, before submitting the PR to review:
 ```shell script
-RUSTUP_TOOLCHAIN=1.41.1 ./contrib/test.sh
+BITCOIN_MSRV=1.29.0 ./contrib/test.sh
 ```
-Please replace the value in `RUSTUP_TOOLCHAIN=1.41.1` with the current MSRV from
+Please replace the value in `BITCOIN_MSRV=1.29.0` with the current MSRV from
 [README.md].
 
 NB: Please keep in mind that the script above replaces `Cargo.lock` file, which
@@ -156,6 +156,7 @@ Current list of the project maintainers:
 
 - [Andrew Poelstra](https://github.com/apoelstra)
 - [Steven Roose](https://github.com/stevenroose)
+- [Maxim Orlovsky](https://github.com/dr-orlovsky)
 - [Matt Corallo](https://github.com/TheBlueMatt)
 - [Elichai Turkel](https://github.com/elichai)
 - [Sanket Kanjalkar](https://github.com/sanket1729)
@@ -170,9 +171,24 @@ Library reflects Bitcoin Core approach whenever possible.
 
 ### Formatting
 
-The repository currently does use `rustfmt`. The introduction of this is still
-WIP (see 'ignore' in `rustfmt.toml`) but we are working towards full
-formatting.
+The repository currently does not use `rustfmt`.
+
+New changes may format the code with `rustfmt`, but they should not re-format
+any existing code for maintaining diff size small, keeping `git blame` intact and
+reduce review time. Repository maintainers may not review PRs introducing large
+blocks of re-formatted code.
+
+You may check the [discussion on the formatting](https://github.com/rust-bitcoin/rust-bitcoin/issues/172)
+and [how it is planned to coordinate it with crate refactoring](https://github.com/rust-bitcoin/rust-bitcoin/pull/525)
+
+For the new code it is recommended to follow style of the existing codebase and
+avoid any end-line space characters.
+
+### MSRV
+
+The Minimal Supported Rust Version (MSRV) is 1.29; it is enforced by our CI.
+Later we plan to increase MSRV to support Rust 2018 and you are welcome to check
+the [tracking issue](https://github.com/rust-bitcoin/rust-bitcoin/issues/510).
 
 ### Naming conventions
 

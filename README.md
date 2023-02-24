@@ -9,15 +9,15 @@
 
   <p>
     <a href="https://crates.io/crates/bitcoin"><img alt="Crate Info" src="https://img.shields.io/crates/v/bitcoin.svg"/></a>
-    <a href="https://github.com/rust-bitcoin/rust-bitcoin/blob/master/LICENSE"><img alt="CC0 1.0 Universal Licensed" src="https://img.shields.io/badge/license-CC0--1.0-blue.svg"/></a>
+    <a href="https://github.com/rust-bitcoin/rust-bitcoin/blob/master/LICENSE"><img alt="MIT or Apache-2.0 Licensed" src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg"/></a>
     <a href="https://github.com/rust-bitcoin/rust-bitcoin/actions?query=workflow%3AContinuous%20integration"><img alt="CI Status" src="https://github.com/rust-bitcoin/rust-bitcoin/workflows/Continuous%20integration/badge.svg"></a>
     <a href="https://docs.rs/bitcoin"><img alt="API Docs" src="https://img.shields.io/badge/docs.rs-bitcoin-green"/></a>
-    <a href="https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html"><img alt="Rustc Version 1.41.1+" src="https://img.shields.io/badge/rustc-1.41.1%2B-lightgrey.svg"/></a>
+    <a href="https://blog.rust-lang.org/2018/09/13/Rust-1.29.html"><img alt="Rustc Version 1.29+" src="https://img.shields.io/badge/rustc-1.29%2B-lightgrey.svg"/></a>
     <a href="https://gnusha.org/bitcoin-rust/"><img alt="Chat on IRC" src="https://img.shields.io/badge/irc-%23bitcoin--rust%20on%20libera.chat-blue"></a>
-    <a href="https://github.com/model-checking/kani"><imp alt="kani" src="https://github.com/rust-bitcoin/rust-bitcoin/actions/workflows/kani.yaml/badge.svg"></a>
     <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/rust-bitcoin/rust-bitcoin">
   </p>
 </div>
+
 
 [Documentation](https://docs.rs/bitcoin/)
 
@@ -27,13 +27,11 @@ Supports (or should support)
 * De/serialization of blocks and transactions
 * Script de/serialization
 * Private keys and address creation, de/serialization and validation (including full BIP32 support)
-* PSBT v0 de/serialization and all but the Input Finalizer role. Use [rust-miniscript](https://docs.rs/miniscript/latest/miniscript/psbt/index.html) to finalize.
+* PSBT creation, manipulation, merging and finalization
+* Pay-to-contract support as in Appendix A of the [Blockstream sidechains whitepaper](https://www.blockstream.com/sidechains.pdf)
 
 For JSONRPC interaction with Bitcoin Core, it is recommended to use
 [rust-bitcoincore-rpc](https://github.com/rust-bitcoin/rust-bitcoincore-rpc).
-
-It is recommended to always use [cargo-crev](https://github.com/crev-dev/cargo-crev)
-to verify the trustworthiness of each of your dependencies, including this one.
 
 ## Known limitations
 
@@ -72,12 +70,28 @@ please join us in
 [#bitcoin-rust](https://web.libera.chat/?channel=#bitcoin-rust) on
 [libera.chat](https://libera.chat).
 
-For more information please see `./CONTRIBUTING.md`.
-
 ## Minimum Supported Rust Version (MSRV)
 
 This library should always compile with any combination of features (minus
-`no-std`) on **Rust 1.41.1** or **Rust 1.47** with `no-std`.
+`no-std`) on **Rust 1.29** or **Rust 1.47** with `no-std`.
+
+Because some dependencies have broken the build in minor/patch releases, to
+compile with 1.29.0 you will need to run the following version-pinning command:
+```
+cargo update -p cc --precise "1.0.41" --verbose
+```
+
+In order to use the `use-serde` feature or to build the unit tests with 1.29.0,
+the following version-pinning commands are also needed:
+```
+cargo update --package "serde" --precise "1.0.98"
+cargo update --package "serde_derive" --precise "1.0.98"
+```
+
+For the feature `base64` to work with 1.29.0 we also need to pin `byteorder`:
+```
+cargo update -p byteorder --precise "1.3.4"
+```
 
 ## Installing Rust
 
@@ -106,48 +120,6 @@ cargo test
 
 Please refer to the [`cargo` documentation](https://doc.rust-lang.org/stable/cargo/) for more detailed instructions.
 
-### Building the docs
-
-We build docs with the nightly toolchain, you may wish to use the following
-shell alias to check your documentation changes build correctly.
-
-```
-alias build-docs='RUSTDOCFLAGS="--cfg docsrs" cargo +nightly rustdoc --features="$FEATURES" -- -D rustdoc::broken-intra-doc-links'
-```
-
-## Testing
-
-Unit and integration tests are available for those interested, along with benchmarks. For project
-developers, especially new contributors looking for something to work on, we do:
-
-- Fuzz testing with [`Hongfuzz`](https://github.com/rust-fuzz/honggfuzz-rs)
-- Mutation testing with [`Mutagen`](https://github.com/llogiq/mutagen)
-- Code verification with [`Kani`](https://github.com/model-checking/kani)
-
-There are always more tests to write and more bugs to find, contributions to our testing efforts
-extremely welcomed. Please consider testing code a first class citizen, we definitely do take PRs
-improving and cleaning up test code.
-
-### Unit/Integration tests
-
-Run as for any other Rust project `cargo test --all-features`.
-
-### Benchmarks
-
-We use a custom Rust compiler configuration conditional to guard the bench mark code. To run the
-bench marks use: `RUSTFLAGS='--cfg=bench' cargo +nightly bench`.
-
-### Mutation tests
-
-We have started doing mutation testing with [mutagen](https://github.com/llogiq/mutagen). To run
-these tests first install the latest dev version with `cargo +nightly install --git https://github.com/llogiq/mutagen`
-then run with `RUSTFLAGS='--cfg=mutate' cargo +nightly mutagen`.
-
-### Code verification
-
-We have started using [kani](https://github.com/model-checking/kani), install with `cargo install
---locked kani-verifier` (no need to run `cargo kani setup`). Run the tests with `cargo kani`.
-
 ## Pull Requests
 
 Every PR needs at least two reviews to get merged. During the review phase
@@ -164,17 +136,6 @@ In order to speed up the review process the CI pipeline can be run locally using
 [act](https://github.com/nektos/act). The `fuzz` and `Cross` jobs will be
 skipped when using `act` due to caching being unsupported at this time. We do
 not *actively* support `act` but will merge PRs fixing `act` issues.
-
-### Githooks
-
-To assist devs in catching errors _before_ running CI we provide some githooks. If you do not
-already have locally configured githooks you can use the ones in this repository by running, in the
-root directory of the repository:
-```
-git config --local core.hooksPath githooks/
-```
-
-Alternatively add symlinks in your `.git/hooks` directory to any of the githooks we provide.
 
 ## Policy on Altcoins/Altchains
 
@@ -198,5 +159,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 ## Licensing
 
 The code in this project is licensed under the [Creative Commons CC0 1.0
-Universal license](LICENSE). We use the [SPDX license list](https://spdx.org/licenses/) and [SPDX
-IDs](https://spdx.dev/ids/).
+Universal license](LICENSE).
