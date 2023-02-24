@@ -89,7 +89,7 @@ fn bitcoin_genesis_tx() -> Transaction {
     // Inputs
     let in_script = script::Builder::new().push_scriptint(486604799)
                                           .push_scriptint(4)
-                                          .push_slice(b"NY Times 05/Oct/2011 Steve Jobs, Apple’s Visionary, Dies at 56")
+                                          .push_slice(b"NY Times 05/Oct/2011 Steve Jobs, Apple's Visionary, Dies at 56")
                                           .into_script();
     ret.input.push(TxIn {
         previous_output: OutPoint::null(),
