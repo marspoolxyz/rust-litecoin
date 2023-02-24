@@ -1,16 +1,16 @@
 <div align="center">
-  <h1>Rust Bitcoin</h1>
+  <h1>Rust Litecoin</h1>
 
-  <img alt="Rust Bitcoin logo by Hunter Trujillo, see license and source files under /logo" src="./logo/rust-bitcoin.png" width="300" />
+  <img alt="Rust Litecoin logo by Hunter Trujillo, see license and source files under /logo" src="./logo/rust-bitcoin.png" width="300" />
 
   <p>Library with support for de/serialization, parsing and executing on data-structures
-    and network messages related to Bitcoin.
+    and network messages related to Litecoin.
   </p>
 
   <p>
-    <a href="https://crates.io/crates/bitcoin"><img alt="Crate Info" src="https://img.shields.io/crates/v/bitcoin.svg"/></a>
-    <a href="https://github.com/rust-bitcoin/rust-bitcoin/blob/master/LICENSE"><img alt="MIT or Apache-2.0 Licensed" src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg"/></a>
-    <a href="https://github.com/rust-bitcoin/rust-bitcoin/actions?query=workflow%3AContinuous%20integration"><img alt="CI Status" src="https://github.com/rust-bitcoin/rust-bitcoin/workflows/Continuous%20integration/badge.svg"></a>
+    <a href="https://crates.io/crates/litecoinlib"><img alt="Crate Info" src="https://img.shields.io/crates/v/bitcoin.svg"/></a>
+    <a href="https://github.com/marspoolxyz/rust-litecoin/blob/master/LICENSE"><img alt="MIT or Apache-2.0 Licensed" src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg"/></a>
+    <a href="https://github.com/marspoolxyz/rust-litecoin//actions?query=workflow%3AContinuous%20integration"><img alt="CI Status" src="https://github.com/marspoolxyz/rust-litecoin//workflows/Continuous%20integration/badge.svg"></a>
     <a href="https://docs.rs/bitcoin"><img alt="API Docs" src="https://img.shields.io/badge/docs.rs-bitcoin-green"/></a>
     <a href="https://blog.rust-lang.org/2018/09/13/Rust-1.29.html"><img alt="Rustc Version 1.29+" src="https://img.shields.io/badge/rustc-1.29%2B-lightgrey.svg"/></a>
     <a href="https://gnusha.org/bitcoin-rust/"><img alt="Chat on IRC" src="https://img.shields.io/badge/irc-%23bitcoin--rust%20on%20libera.chat-blue"></a>
@@ -23,15 +23,15 @@
 
 Supports (or should support)
 
-* De/serialization of Bitcoin protocol network messages
+* De/serialization of Litecoin protocol network messages
 * De/serialization of blocks and transactions
 * Script de/serialization
 * Private keys and address creation, de/serialization and validation (including full BIP32 support)
 * PSBT creation, manipulation, merging and finalization
 * Pay-to-contract support as in Appendix A of the [Blockstream sidechains whitepaper](https://www.blockstream.com/sidechains.pdf)
 
-For JSONRPC interaction with Bitcoin Core, it is recommended to use
-[rust-bitcoincore-rpc](https://github.com/rust-bitcoin/rust-bitcoincore-rpc).
+For JSONRPC interaction with Litecoin Core, work in progress....
+[rust-litecoincore-rpc](https://github.com/marspoolxyz/rust-litecoin/core-rpc).
 
 ## Known limitations
 
@@ -40,8 +40,8 @@ For JSONRPC interaction with Bitcoin Core, it is recommended to use
 This library **must not** be used for consensus code (i.e. fully validating
 blockchain data). It technically supports doing this, but doing so is very
 ill-advised because there are many deviations, known and unknown, between
-this library and the Bitcoin Core reference implementation. In a consensus
-based cryptocurrency such as Bitcoin it is critical that all parties are
+this library and the Litecoin Core reference implementation. In a consensus
+based cryptocurrency such as Litecoin it is critical that all parties are
 using the same rules to validate data, and this library is simply unable
 to implement the same rules as Core.
 
@@ -57,7 +57,7 @@ is and possibly decide to support them.
 
 ## Documentation
 
-Currently can be found on [docs.rs/bitcoin](https://docs.rs/bitcoin/).
+Currently can be found on [docs.rs/Litecoin](https://docs.rs/bitcoin/).
 Patches to add usage examples and to expand on existing docs would be extremely
 appreciated.
 
@@ -139,7 +139,7 @@ not *actively* support `act` but will merge PRs fixing `act` issues.
 
 ## Policy on Altcoins/Altchains
 
-Patches which add support for non-Bitcoin cryptocurrencies by adding constants
+Patches which add support for non-Litecoin cryptocurrencies by adding constants
 to existing enums (e.g. to set the network message magic-byte sequence) are
 welcome. Anything more involved will be considered on a case-by-case basis,
 as the altcoin landscape includes projects which [frequently appear and
